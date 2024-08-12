@@ -1,0 +1,38 @@
+\documentclass[border=3pt,tikz]{standalone}
+
+\usepackage{minkowski}
+
+\begin{document}
+\begin{tikzpicture}[scale=2.0]
+    \def\xrange{2.0}
+
+    \coordinate (O) at (0,0);
+    \coordinate (T) at (0,\xrange+0.2);
+    \coordinate (A) at ({1.5 * sinh(0.5)}, {1.5 * cosh(0.5)});
+    \coordinate (EA) at (0, {1.5 * cosh(0.5)});
+    \coordinate (pA) at ({1.5 * sinh(0.5)},0);
+
+    % axes
+    \draw[->,thick] (O) -- (T) node[left=1] {$E$};
+    \draw[->,thick] (-\xrange,0) -- (\xrange+0.2,0) node[below=0] {$p^x$};
+
+    % light cone
+    \draw[light cone] (-\xrange,\xrange) -- (O);
+    \draw[light cone] (\xrange,\xrange) -- (O);
+
+    % vectors
+    \draw[vector] (O) -- (A)  node[right=0] {$p^\mu$};
+
+    % lines
+    \fill[red,opacity=0.15,thick,samples=\Nsamples,smooth,variable=\x,domain=0:0.5] (A) -- (EA) -- (O);
+    \draw[isomass,red,samples=\Nsamples,smooth,variable=\x,domain=-1:1] plot({1.5 * sinh(\x)},{1.5 * cosh(\x)}) node[right=0] {$m$};
+    \draw[thick,densely dotted] (A) -- (EA) node[midway,above] {\footnotesize $m \sinh \zeta$};
+    \draw[thick,densely dotted] (A) -- (pA) node[pos=0.7,right=5,rotate=90] {\footnotesize $m \cosh \zeta$};
+
+    \draw[anglemarker,red,samples=\Nsamples,smooth,variable=\x,domain=0:0.5] plot({0.5 * sinh(\x)},{0.5 * cosh(\x)}) node[text=black] at (0.1,0.4) {$\zeta$};
+    \fill[red,opacity=0.05,thick,samples=\Nsamples,smooth,variable=\x,domain=0:0.5] plot({0.5 * sinh(\x)},{0.5 * cosh(\x)}) -- (O);
+
+    \draw[thick,black] (0.1,{1.5 * cosh(0.5)}) -- (0.1,{1.5 * cosh(0.5) - 0.1}) -- (0,{1.5 * cosh(0.5) - 0.1});
+    \draw plot [mark=*, mark size=0.1] coordinates{(0.05, {1.5 * cosh(0.5) - 0.05})};
+\end{tikzpicture}
+\end{document}

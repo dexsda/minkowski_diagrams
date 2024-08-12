@@ -1,0 +1,34 @@
+\documentclass[border=3pt,tikz]{standalone}
+
+\usepackage{minkowski}
+
+\begin{document}
+\begin{tikzpicture}[scale=2.0]
+    \def\xrange{2.0}
+
+    \coordinate (O) at (0,0);
+    \coordinate (T) at (0,\xrange+0.2);
+    \coordinate (A) at ({0.8* sinh(0.5)}, {0.8 * cosh(0.5)});
+    \coordinate (B) at ({-0.8* sinh(0.5)}, {0.8 * cosh(0.5)});
+    \coordinate (SUM) at (0, {2 * 0.8 * cosh(0.5)});
+
+    \draw[->,thick] (O) -- (T) node[left=1] {$E$};
+    \draw[->,thick] (-\xrange,0) -- (\xrange+0.2,0) node[below=0] {$p^x$};
+
+    \draw[light cone] (-\xrange,\xrange) -- (O);
+    \draw[light cone] (\xrange,\xrange) -- (O);
+
+    \draw[isomass,red,samples=\Nsamples,smooth,variable=\x,domain=-1.5:1.5] plot({0.8 * sinh(\x)},{0.8 * cosh(\x)}) node[right=0] {$m$};
+    \draw[isomass,red,samples=\Nsamples,smooth,variable=\x,domain=-0.6:0.6] plot({2 * 0.8 * sinh(\x)},{2 * 0.8 * cosh(\x)}) node[right=0] {$2 m$};
+
+    \draw[vector] (O) -- (A)  node[right=0] {$p_1^\mu$};
+    \draw[vector] (O) -- (B)  node[left=0] {$p_2^\mu$};
+    \draw[thin,dashed] (A) -- (SUM);
+    \draw[thin,dashed] (B) -- (SUM);
+    \draw[vector,line width=1.5] (O) -- (SUM)  node[left=0] {$p_{\textrm{tot}}^\mu$};
+
+    \draw[anglemarker,black,samples=\Nsamples,smooth,variable=\x,domain=0:0.5] plot({0.5 * sinh(\x)},{0.5 * cosh(\x)}) node[text=black] at (0.1,0.4) {$\zeta$};
+    \fill[red,opacity=0.00,thick,samples=\Nsamples,smooth,variable=\x,domain=0:0.5]
+        plot({0.5 * sinh(\x)},{0.5 * cosh(\x)}) -- (O);
+\end{tikzpicture}
+\end{document}

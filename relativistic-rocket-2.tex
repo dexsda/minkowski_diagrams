@@ -1,0 +1,62 @@
+\documentclass[border=3pt,tikz]{standalone}
+\usetikzlibrary{intersections}
+\usepackage{minkowski}
+
+\begin{document}
+\begin{tikzpicture}[scale=2.0]
+    \def\xrange{1.8}
+
+    \coordinate (O) at (0,0);
+    \coordinate (T) at (0,\xrange+0.2);
+    \coordinate (Ve) at ({0.4* sinh(-0.9)}, {0.4 * cosh(-0.9)});
+    \coordinate (Ven) at ({0.4* sinh(-0.9+0.38)}, {0.4 * cosh(-0.9+0.38)});
+    \coordinate (SUM) at (0, {2 * 0.9});
+    \coordinate (A) at ($(SUM)-(Ve)$);
+    \coordinate (B) at ($(A)-(Ven)$);
+
+    \draw[->,thick] (O) -- (T) node[left=1] {$E$};
+    \draw[->,thick] (-\xrange*0.666,0) -- (\xrange*0.666+0.2,0) node[below=0] {$p^x$};
+
+    \draw[light cone] (-1.2,1.2) -- (O);
+    \draw[light cone] (1.2,1.2) -- (O);
+
+    \draw[isomass,green!80!black,samples=\Nsamples,smooth,variable=\x,domain=-1.8:1.8] plot({0.4 * sinh(\x)},{0.4 * cosh(\x)}) node[right=0] {$\delta m$};
+
+    \draw[anglemarker,red,samples=\Nsamples,smooth,variable=\x,domain=-0.55:0] plot({0.35 * sinh(\x)-0.4* sinh(-0.9)-0.4* sinh(-0.9+0.38)},{0.35 * cosh(\x)-0.4* cosh(-0.9)-0.4* cosh(-0.9+0.38)+2 * 0.9});% node[text=black] at (-0.2,0.7) {\small $\omega_1$};
+    \fill[red,opacity=0.1,thick,samples=\Nsamples,smooth,variable=\x,domain=-0.55:0]
+        plot({0.35 * sinh(\x)},{0.35 * cosh(\x)}) -- (O);
+    \draw[anglemarker,red,samples=\Nsamples,smooth,variable=\x,domain=-0.55:0] plot({0.35 * sinh(\x)},{0.35 * cosh(\x)}) node[text=black] at (-0.2,0.7) {\small $\omega_1$};
+    \fill[red,opacity=0.1,thick,samples=\Nsamples,smooth,variable=\x,domain=-0.55:0]
+        plot({0.35 * sinh(\x)-0.4* sinh(-0.9)-0.4* sinh(-0.9+0.38)},{0.35 * cosh(\x)-0.4* cosh(-0.9)-0.4* cosh(-0.9+0.38)+2 * 0.9}) -- (B);
+    \fill[green!80!black,opacity=0.1,thick,samples=\Nsamples,smooth,variable=\x,domain=-0.0:0]
+        plot({0.35 * sinh(\x)-0.4* sinh(-0.9)},{0.35 * cosh(\x)+2 * 0.9-0.4 * cosh(-0.9)}) -- (A);
+
+    \draw[anglemarker,orange,samples=\Nsamples,smooth,variable=\x,domain=0:0.35] plot({0.35 * sinh(\x)},{0.35 * cosh(\x)}) node[text=black] at (0.045,0.28) {\footnotesize $\zeta$};
+
+    \fill[orange,opacity=0.1,thick,samples=\Nsamples,smooth,variable=\x,domain=0:0.35]
+        plot({0.35 * sinh(\x)},{0.35 * cosh(\x)}) -- (O);
+
+    %\draw[isomass,blue!80!black,samples=\Nsamples,smooth,variable=\x,domain=-1:1] plot({1.15* sinh(\x)},{1.15*cosh(\x)}) node[right=0] {$m_1$};
+
+    \draw[anglemarker,blue,samples=\Nsamples,smooth,variable=\x,domain=0.35:1.1] plot({0.35 * sinh(\x)},{0.35 * cosh(\x)}) node[text=black] at (0.4,0.2) {\footnotesize $\delta \zeta$};
+
+    \fill[blue,opacity=0.1,thick,samples=\Nsamples,smooth,variable=\x,domain=0.35:1.1]
+        plot({0.35 * sinh(\x)},{0.35 * cosh(\x)}) -- (O);
+
+    %\draw[isomass,red,samples=\Nsamples,smooth,variable=\x,domain=-0.6:0.6] plot({2 * 0.9 * sinh(\x)},{2 * 0.9 * cosh(\x)}) node[right=0] {$m$};
+
+    \draw[vector] (O) -- (Ve);%  node[right=0] {$p_{e0}^\mu$};
+    \draw[vector] (O) -- (Ven);
+    %\draw[vector] (A) -- (SUM);% 
+    %\draw[thin,densely dotted] (A) -- ($(A) + (0, 1.0)$);
+    \draw[vector] (O) -- (A);%  node[below right] {$p_1^\mu$};
+    \draw[vector,red,dashed] (B) -- (A);
+    \draw[vector] (O) -- (B) node[below] {\footnotesize $p_2^\mu$};
+    \draw[thick,densely dotted,red,name path = l1] (B) -- ($(B) + (0, 0.47)$) node[midway,right=-3,text=black] {\footnotesize $\delta E$};
+    \draw[thick,densely dotted,red,name path = l2] (A) -- ($(A) + (0.22, 0)$) node[midway,above=-3,text=black] {\footnotesize $\delta p$};
+    %\draw[vector,line width=1.5] (O) -- (SUM);%  node[left=0] {$m_0$};
+    \draw[thin] (0.3,0.2) -- (0.15,0.25);
+    \draw[thin] (-0.12,0.74) -- (0.6,0.95);
+    \draw[thin] (-0.2,0.65) -- (-0.05,0.25);
+\end{tikzpicture}
+\end{document}

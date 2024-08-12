@@ -1,0 +1,54 @@
+\documentclass[border=3pt,tikz]{standalone}
+
+\usepackage{minkowski}
+
+\begin{document}
+\begin{tikzpicture}[scale=2.0]
+    \def\xrange{2.0}
+
+    \coordinate (O) at (0,0);
+    \coordinate (T) at (0,\xrange+0.2);
+    \coordinate (T2) at ({2*sinh(0.4)},{2*cosh(0.4)});
+
+    % axes
+    \draw[->,thick] (O) -- (T) node[left=1] {$E$};
+    \draw[->,thick] (-\xrange,0) -- (\xrange+0.2,0) node[below=0] {$p^x$};
+
+    \draw[->,thick,dashed] (O) -- (T2) node[left=1] {$E'$};
+    \draw[->,thick,dashed] (O) -- ({\xrange*cosh(0.4)},{2*sinh(0.4)}) node[below=0] {$p'^x$};
+
+    % light cone
+    \draw[light cone] (-\xrange,\xrange) -- (O);
+    \draw[light cone] (\xrange,\xrange) -- (O);
+
+    % triangles
+    \draw[anglemarker,red,samples=\Nsamples,smooth,variable=\x,domain=0:0.4] plot({0.5 * sinh(\x)},{0.5 * cosh(\x)}) node[text=black] at (0.07,0.4) {$\zeta$};
+    \fill[red,opacity=0.05,thick,samples=\Nsamples,smooth,variable=\x,domain=0:0.4] plot({0.5 * sinh(\x)},{0.5 * cosh(\x)}) -- (O);
+
+    \fill[red,opacity=0.15] (O) -- (0,{1.0*cosh(0.4)}) -- ({1.0*sinh(0.4)},{1.0*cosh(0.4)}) -- (O);
+    \draw[thick,black] (O) -- (0,{1.0*cosh(0.4)}) -- ({1.0*sinh(0.4)},{1.0*cosh(0.4)}) -- (O);
+
+    \draw[thick,black] (0.1,{1.0 * cosh(0.4)}) -- (0.1,{1.0 * cosh(0.4) - 0.1}) -- (0,{1.0 * cosh(0.4) - 0.1});
+    \draw plot [mark=*, mark size=0.1] coordinates{(0.05, {1.0 * cosh(0.4) - 0.05})};
+
+
+    \draw[anglemarker,red,samples=\Nsamples,smooth,variable=\x,domain=0.4:0.8] plot({0.5 * sinh(\x)},{0.5 * cosh(\x)}) node[text=black] at (0.22,0.45) {$\zeta$};
+    \fill[red,opacity=0.05,thick,samples=\Nsamples,smooth,variable=\x,domain=0.4:0.8] plot({0.5 * sinh(\x)},{0.5 * cosh(\x)}) -- (O);
+
+    \fill[red,opacity=0.15] (O) -- ({1.0*sinh(0.4)},{1.0*cosh(0.4)}) -- ({0.925007*sinh(0.8)},{0.925007*cosh(0.8)}) -- (O);
+    \draw[thick,black] (O) -- ({1.0*sinh(0.4)},{1.0*cosh(0.4)}) -- ({0.925007*sinh(0.8)},{0.925007*cosh(0.8)}) -- (O);
+    
+    \draw[thick,black] ({1.0*sinh(0.4 + cosh(0.4)*0.1)},{1.0*cosh(0.4) + sinh(0.4)*0.1}) -- ({0.9*sinh(0.4 + cosh(0.4)*0.1)},{0.9*cosh(0.4) + sinh(0.4)*0.1}) -- ({0.9*sinh(0.4)},{0.9*cosh(0.4)});
+    \draw plot [mark=*, mark size=0.1] coordinates{({0.95 * sinh(0.4) + cosh(0.4)*0.05}, {0.95 * cosh(0.4) + sinh(0.4)*0.05})};
+
+
+    \draw[anglemarker,red,samples=\Nsamples,smooth,variable=\x,domain=0:0.4] plot({0.5 * cosh(\x)},{0.5 * sinh(\x)}) node[text=black] at (0.45,0.09) {$\zeta$};
+    \fill[red,opacity=0.05,thick,samples=\Nsamples,smooth,variable=\x,domain=0:0.4] plot({0.5 * cosh(\x)},{0.5 * sinh(\x)}) -- (O);
+
+    \fill[red,opacity=0.15] (O) -- ({1.0*cosh(0.4)},0) -- ({1.0*cosh(0.4)},{1.0*sinh(0.4)}) -- (O);
+    \draw[thick,black] (O) -- ({1.0*cosh(0.4)},0) -- ({1.0*cosh(0.4)},{1.0*sinh(0.4)}) -- (O);
+
+    \draw[thick,black] ({1.0 * cosh(0.4)}, 0.1) -- ({1.0 * cosh(0.4) - 0.1}, 0.1) -- ({1.0 * cosh(0.4) - 0.1}, 0);
+    \draw plot [mark=*, mark size=0.1] coordinates{({1.0 * cosh(0.4) - 0.05}, 0.05)};
+\end{tikzpicture}
+\end{document}

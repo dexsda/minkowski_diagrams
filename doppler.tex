@@ -1,0 +1,40 @@
+\documentclass[border=3pt,tikz]{standalone}
+
+\usepackage{minkowski}
+
+\begin{document}
+\begin{tikzpicture}[scale=2.0]
+    \def\xrange{1.6}
+
+    \coordinate (O) at (0,0);
+    \coordinate (T) at (0,\xrange+0.2);
+    \coordinate (A) at (1.2, 1.2);
+    \coordinate (B) at (-0.8, 0.8);
+    \coordinate (C) at (-0.8, 1.2);
+    \coordinate (C1) at (-0.7, 1.2);
+    \coordinate (C2) at (-0.7, 1.1);
+    \coordinate (C3) at (-0.8, 1.1);
+    \coordinate (C4) at (-0.75, 1.15);
+
+
+    \draw[->,thick] (O) -- (T) node[left=1] {$E$};
+    \draw[->,thick] (-\xrange,0) -- (\xrange+0.2,0) node[below=0] {$p^x$};
+    \draw[->,thick,dash pattern=on 4 off 4] (O) -- (1.76,0.352) node[below=0] {$p'^x$};
+
+    \draw[light cone] (-\xrange,\xrange) -- (O);
+    \draw[light cone] (\xrange,\xrange) -- (O);
+
+    \draw[nullvector] (O) -- (A)  node[below=2] {$p_1^\mu$};
+    \draw[nullvector] (O) -- (B)  node[below=1] {$p_2^\mu$};
+    \draw[thick,red,dash pattern=on 4 off 4] (-1.44, 0.672) -- (1.76,1.312);
+    \draw[thick,red,densely dotted] (A) -- (C) node[midway, above=0,text=black] {\footnotesize $E_1 + E_2$};
+    \draw[thick,red,densely dotted] (B) -- (C) node[midway, left,text=black] {\footnotesize $E_1 - E_2$};
+    \draw[anglemarker,red,samples=\Nsamples,smooth,variable=\x,domain=0:0.21] plot({-0.9 * cosh(\x) + 1.2},{-0.9 * sinh(\x) + 1.2}) node[text=black] at (0.4,1.12) {\footnotesize $\zeta$};
+    \fill[red,opacity=0.05,thick,samples=\Nsamples,smooth,variable=\x,domain=0:0.21]
+        plot({-0.9 * cosh(\x) + 1.2},{-0.9 * sinh(\x) + 1.2}) -- (A);
+    \draw[anglemarker,samples=\Nsamples,smooth,variable=\x,domain=0:0.21] plot({1 * cosh(\x)},{1 * sinh(\x)}) node[text=black] at (0.8,0.08) {\footnotesize $\zeta$};
+
+    \draw[thick,black] (C1) -- (C2) -- (C3);
+    \fill (C4) circle(.01);
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,35 @@
+\documentclass[border=3pt,tikz]{standalone}
+
+\usepackage{minkowski}
+
+\begin{document}
+\begin{tikzpicture}[scale=2.0]
+    \def\xrange{2.0}
+
+    \coordinate (O) at (0,0);
+    \coordinate (T) at (0,\xrange+0.2);
+    \coordinate (A) at ({0.7* sinh(0.5)}, {0.7 * cosh(0.5)});
+    \coordinate (B) at ({ sinh(-0.5)}, {cosh(-0.5)});
+    \coordinate (SUM) at ({0.7* sinh(0.5)+ sinh(-0.5)}, {0.7 * cosh(0.5)+cosh(-0.5)});
+
+    \draw[->,thick] (O) -- (T) node[left=1] {$E$};
+    \draw[->,thick] (-\xrange,0) -- (\xrange+0.2,0) node[below=0] {$p^x$};
+
+    \draw[light cone] (-\xrange,\xrange) -- (O);
+    \draw[light cone] (\xrange,\xrange) -- (O);
+
+    \draw[isomass,red,samples=\Nsamples,smooth,variable=\x,domain=-1.5:1.5] plot({0.7 * sinh(\x)},{0.7 * cosh(\x)}) node[right=0] {$m_1$};
+    \draw[isomass,blue,samples=\Nsamples,smooth,variable=\x,domain=-1.2:1.2] plot({ sinh(\x)},{cosh(\x)}) node[right=0] {$m_2$};
+    \draw[isomass,densely dotted,red,samples=\Nsamples,smooth,variable=\x,domain=-1.3:1.3] plot({0.7 * sinh(\x) + 0.7* sinh(0.5)+ sinh(-0.5)},{-0.7 * cosh(\x)+0.7 * cosh(0.5)+ cosh(-0.5)}) node[right=0] {$m'_1$};
+    \draw[isomass,densely dotted,blue,samples=\Nsamples,smooth,variable=\x,domain=-1.1:1.1] plot({sinh(\x) + 0.7* sinh(0.5)+sinh(-0.5)},{-cosh(\x)+0.7 * cosh(0.5)+cosh(-0.5)}) node[right=0] {$m'_2$};
+
+    \draw[vector] (O) -- (A);  %node[right=0] {$p_1^\mu$};
+    \draw[vector] (O) -- (B);%  node[left=0] {$p_2^\mu$};
+    \draw[thin,dashed] (A) -- (SUM);
+    \draw[thin,dashed] (B) -- (SUM);
+
+    \draw[vector,dashed] (O) -- ({sinh(0.33)},{cosh(0.33)});
+    \draw[vector,dashed] (O) -- ({0.7* sinh(-0.68)},{0.7* cosh(-0.68)});
+
+\end{tikzpicture}
+\end{document}
