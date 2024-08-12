@@ -1,0 +1,15 @@
+\usepackage{amsmath}
+\usepackage{etoolbox}
+\usepackage{xfp}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.markings,decorations.pathmorphing}
+\usetikzlibrary{arrows.meta}
+
+\tikzset{>=latex}
+\def\Nsamples{100}
+
+\tikzstyle{vector}=[->,line width=1,line cap=round]
+\tikzstyle{nullvector}=[vector,decorate,decoration={snake,amplitude=0.4,segment length=5,post length=5}]
+\tikzstyle{light cone}=[orange!60,thin]
+\tikzstyle{isomass}=[line width=0.5,dash pattern=on 3 off 3]
+\tikzstyle{anglemarker}=[thick]
